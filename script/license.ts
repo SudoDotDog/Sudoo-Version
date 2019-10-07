@@ -19,7 +19,7 @@ const appPackage: any = {
     name: parent.name,
     main: "index.js",
     bin: {
-        version: "cli.js",
+        version: "bin",
     },
     version: parent.version,
     description: parent.description,
@@ -32,3 +32,8 @@ const appPackage: any = {
     dependencies: parent.dependencies,
 };
 Fs.writeFileSync(Path.join(appPath, 'package.json'), JSON.stringify(appPackage, null, 2), 'utf8');
+Fs.writeFileSync(Path.join(appPath, 'bin'), [
+    `#!/usr/bin/env node`, '',
+    `const version = require('./cli.js').execute;`,
+    `version(process.argv);`, '',
+].join('\n'));

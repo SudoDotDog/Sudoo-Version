@@ -45,7 +45,7 @@ coco.command(Command.create('patch').argument(Argument.create('path')).then(asyn
     await writeConfig(path, newVersion);
 }));
 
-(async () => {
+export const execute = async (args: string[]): Promise<void> => {
 
-    await coco.go(process.argv);
-})();
+    await coco.go(args);
+};
