@@ -39,6 +39,10 @@ example-patch: dev example-chmod
 	@echo "[INFO] Running Example"
 	@./app/bin patch example/version.json
 
+example-auto: dev example-chmod
+	@echo "[INFO] Running Example"
+	@./app/bin auto example/version.json
+
 tests:
 	@echo "[INFO] Testing with Mocha"
 	@NODE_ENV=test $(mocha)
