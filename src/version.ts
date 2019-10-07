@@ -10,7 +10,7 @@ export class Version {
 
         const splited: number[] = version.split('.').map(Number);
         if (splited.length !== 3 || isNaN(splited[0]) || isNaN(splited[1]) || isNaN(splited[2])) {
-            throw new Error(`Invalid version, should be "x.x.x", get "${version}"`);
+            throw new Error(`Invalid version structure, should be "x.x.x", but got "${version}".`);
         }
 
         return new Version(splited[0], splited[1], splited[2]);
