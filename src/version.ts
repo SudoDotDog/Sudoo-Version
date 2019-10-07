@@ -22,7 +22,7 @@ export class Version {
     private readonly _minor: number;
     private readonly _patch: number;
 
-    private readonly _next?: Next;
+    private readonly _next: Next;
 
     private constructor(major: number, minor: number, patch: number, next: Next = 'patch') {
 
