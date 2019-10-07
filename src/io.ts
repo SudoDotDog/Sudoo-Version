@@ -20,6 +20,7 @@ export const writeConfig = async (path: string, version: Version, spaces: number
 
     const structure: VersionFile = {
         version: version.toString(),
+        next: 'patch',
     };
 
     const stringified: string = JSON.stringify(structure, null, spaces || 2);

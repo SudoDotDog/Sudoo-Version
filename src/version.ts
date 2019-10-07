@@ -8,7 +8,7 @@ import { Next } from "./declare";
 
 export class Version {
 
-    public static create(version: string, next?: Next): Version {
+    public static create(version: string, next: Next): Version {
 
         const splited: number[] = version.split('.').map(Number);
         if (splited.length !== 3 || isNaN(splited[0]) || isNaN(splited[1]) || isNaN(splited[2])) {
@@ -24,7 +24,7 @@ export class Version {
 
     private readonly _next?: Next;
 
-    private constructor(major: number, minor: number, patch: number, next?: Next) {
+    private constructor(major: number, minor: number, patch: number, next: Next = 'patch') {
 
         [this._major, this._minor, this._patch] = [major, minor, patch];
 
@@ -36,10 +36,6 @@ export class Version {
     }
 
     public auto(): Version {
-
-        if (!this._next) {
-            return this.patch();
-        }
 
         if (this._next.toLowerCase() === 'major') {
             return this.major();

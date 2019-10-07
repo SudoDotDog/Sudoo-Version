@@ -4,10 +4,10 @@
  * @description Declare
  */
 
-export type Next = 'major' | 'minor';
+export type Next = 'major' | 'minor' | 'patch';
 
 export type VersionFile = {
 
     readonly version: string;
-    readonly next?: Next;
+    readonly next: Next;
 };

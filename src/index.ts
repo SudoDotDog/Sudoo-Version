@@ -6,4 +6,5 @@
 
 export * from "./io";
 export * from "./version";
+export * from "./declare";
 
