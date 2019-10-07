@@ -20,6 +20,11 @@ export class Version {
         [this._major, this._minor, this._patch] = this._init(version);
     }
 
+    public toString(): string {
+
+        return `${this._major}.${this._minor}.${this._patch}`;
+    }
+
     private _init(version: string): [number, number, number] {
 
         const splited: number[] = version.split('.').map(Number);

@@ -19,6 +19,10 @@ build:
 	@echo "[INFO] Building for production"
 	@NODE_ENV=production $(tsc) --p $(build)
 
+example: dev
+	@echo "[INFO] Running Example"
+	@node app/cli.js get example/version.json
+
 tests:
 	@echo "[INFO] Testing with Mocha"
 	@NODE_ENV=test $(mocha)

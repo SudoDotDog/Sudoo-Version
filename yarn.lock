@@ -23,6 +23,14 @@
   resolved "https://registry.yarnpkg.com/@sudoo/bark/-/bark-2.7.1.tgz#84b9db0be3aa7b4d6896ced81d9fa9aac96578ef"
   integrity sha512-0zBFbIQAtu3XNJkFPszdljYXXIPXzR63qypfTwFRupmu3gxgfBMtdPShbQebGuGG0KQEmXasGMBQVi2O0jWbbQ==
 
+"@sudoo/coco@^1.8.1":
+  version "1.8.1"
+  resolved "https://registry.yarnpkg.com/@sudoo/coco/-/coco-1.8.1.tgz#5fdd91e69fc1e37e51abd3c60b3e6d06fdc68e65"
+  integrity sha512-3dqeVNBenhihP58sWNqZNOJu25Ph/ELAMiv+fpisNgRYzdaguUV5CQuQtyfgn8ZV9WKDvnlXhrAp8rz1z3MPZg==
+  dependencies:
+    "@sudoo/bark" "^2.7.1"
+    connor "^2.6.0"
+
 "@sudoo/io@^1.6.1":
   version "1.6.1"
   resolved "https://registry.yarnpkg.com/@sudoo/io/-/io-1.6.1.tgz#d8d18d17ed61f36eafa6aa7e4b22562f2bd801a5"
