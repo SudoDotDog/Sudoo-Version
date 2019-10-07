@@ -29,19 +29,19 @@ example-get: dev example-chmod
 
 example-major: dev example-chmod
 	@echo "[INFO] Running Example"
-	@./app/bin major example/version.json
+	@./app/bin major example/version.json --spaces 4
 
 example-minor: dev example-chmod
 	@echo "[INFO] Running Example"
-	@./app/bin minor example/version.json
+	@./app/bin minor example/version.json --spaces 4
 
 example-patch: dev example-chmod
 	@echo "[INFO] Running Example"
-	@./app/bin patch example/version.json
+	@./app/bin patch example/version.json --spaces 4
 
 example-auto: dev example-chmod
 	@echo "[INFO] Running Example"
-	@./app/bin auto example/version.json
+	@./app/bin auto example/version.json --spaces 4
 
 tests:
 	@echo "[INFO] Testing with Mocha"

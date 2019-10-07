@@ -1,6 +1,6 @@
 {
   "name": "@sudoo/version",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": ":hash: Version Number Controller",
   "main": "index.js",
   "repository": {
@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/SudoDotDog/Sudoo-Version#readme",
   "dependencies": {
-    "@sudoo/coco": "^1.8.1",
+    "@sudoo/coco": "^1.8.3",
     "@sudoo/io": "^1.6.1"
   },
   "devDependencies": {

@@ -16,13 +16,13 @@ export const readConfig = async (path: string): Promise<Version> => {
     return Version.create(parsed.version, parsed.next);
 };
 
-export const writeConfig = async (path: string, version: Version): Promise<void> => {
+export const writeConfig = async (path: string, version: Version, spaces: number = 2): Promise<void> => {
 
     const structure: VersionFile = {
         version: version.toString(),
     };
 
-    const stringified: string = JSON.stringify(structure, null, 2);
+    const stringified: string = JSON.stringify(structure, null, spaces || 2);
     await writeTextFile(path, stringified);
     return;
 };
