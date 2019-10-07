@@ -19,9 +19,21 @@ build:
 	@echo "[INFO] Building for production"
 	@NODE_ENV=production $(tsc) --p $(build)
 
-example: dev
+example-get: dev
 	@echo "[INFO] Running Example"
 	@node app/cli.js get example/version.json
+
+example-major: dev
+	@echo "[INFO] Running Example"
+	@node app/cli.js major example/version.json
+
+example-minor: dev
+	@echo "[INFO] Running Example"
+	@node app/cli.js minor example/version.json
+
+example-patch: dev
+	@echo "[INFO] Running Example"
+	@node app/cli.js patch example/version.json
 
 tests:
 	@echo "[INFO] Testing with Mocha"
