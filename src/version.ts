@@ -5,8 +5,19 @@
  */
 
 import { Next } from "./declare";
+import { readConfig, readConfigSync } from "./io";
 
 export class Version {
+
+    public static async fromJson(path: string): Promise<Version> {
+
+        return await readConfig(path);
+    }
+
+    public static fromJsonSync(path: string): Version {
+
+        return readConfigSync(path);
+    }
 
     public static create(version: string, next: Next): Version {
 
