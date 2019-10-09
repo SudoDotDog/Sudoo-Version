@@ -46,6 +46,16 @@ export class Version {
         return this._next;
     }
 
+    public get majorVersion(): number {
+        return this._major;
+    }
+    public get minorVersion(): number {
+        return this._minor;
+    }
+    public get patchVersion(): number {
+        return this._patch;
+    }
+
     public auto(): Version {
 
         if (this._next.toLowerCase() === 'major') {
@@ -74,9 +84,45 @@ export class Version {
         return new Version(this._major, this._minor, this._patch + 1);
     }
 
+    public compare(version: Version): 1 | 0 | -1 {
+
+        if (this._major > version.majorVersion) {
+            return 1;
+        }
+        if (this._major < version.majorVersion) {
+            return -1;
+        }
+
+        if (this._minor > version.minorVersion) {
+            return 1;
+        }
+        if (this._minor < version.minorVersion) {
+            return -1;
+        }
+
+        if (this._patch > version.patchVersion) {
+            return 1;
+        }
+        if (this._patch < version.patchVersion) {
+            return -1;
+        }
+
+        return 0;
+    }
+
+    public isGreaterThan(version: Version): boolean {
+
+        return this.compare(version) === 1;
+    }
+
+    public isSmallerThan(version: Version): boolean {
+
+        return this.compare(version) === -1;
+    }
+
     public equals(version: Version): boolean {
 
-        return this.hash() === version.hash();
+        return this.compare(version) === 0;
     }
 
     public hash(): string {
