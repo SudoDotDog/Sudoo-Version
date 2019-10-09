@@ -74,6 +74,16 @@ export class Version {
         return new Version(this._major, this._minor, this._patch + 1);
     }
 
+    public equals(version: Version): boolean {
+
+        return this.hash() === version.hash();
+    }
+
+    public hash(): string {
+
+        return this.toString();
+    }
+
     public toString(): string {
 
         return `${this._major}.${this._minor}.${this._patch}`;
