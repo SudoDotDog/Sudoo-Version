@@ -1,6 +1,6 @@
 {
   "name": "@sudoo/version",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": ":hash: Version Number Controller",
   "main": "index.js",
   "repository": {
