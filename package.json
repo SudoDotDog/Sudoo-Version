@@ -17,10 +17,10 @@
   "homepage": "https://github.com/SudoDotDog/Sudoo-Version#readme",
   "dependencies": {
     "@sudoo/coco": "^1.8.5",
-    "@sudoo/io": "^1.7.0"
+    "@sudoo/io": "^1.8.0"
   },
   "devDependencies": {
-    "@sudoo/triforce": "^2.2.1"
+    "@sudoo/triforce": "^2.7.9"
   },
   "nyc": {
     "extension": [
