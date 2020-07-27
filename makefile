@@ -6,8 +6,7 @@ dev := typescript/tsconfig.dev.json
 tsc := node_modules/.bin/tsc
 ts_node := node_modules/.bin/ts-node
 mocha := node_modules/.bin/mocha
-
-.IGNORE: clean-linux
+eslint := node_modules/.bin/eslint
 
 main: dev
 
@@ -19,38 +18,27 @@ build:
 	@echo "[INFO] Building for production"
 	@NODE_ENV=production $(tsc) --p $(build)
 
-example-chmod:
-	@echo "[INFO] Giving Permission"
-	@chmod +x ./app/bin
-
-example-get: dev example-chmod
-	@echo "[INFO] Running Example"
-	@./app/bin get example/version.json
-
-example-major: dev example-chmod
-	@echo "[INFO] Running Example"
-	@./app/bin major example/version.json --spaces 4
-
-example-minor: dev example-chmod
-	@echo "[INFO] Running Example"
-	@./app/bin minor example/version.json --spaces 4
-
-example-patch: dev example-chmod
-	@echo "[INFO] Running Example"
-	@./app/bin patch example/version.json --spaces 4
-
-example-auto: dev example-chmod
-	@echo "[INFO] Running Example"
-	@./app/bin auto example/version.json --spaces 4
-
 tests:
 	@echo "[INFO] Testing with Mocha"
-	@NODE_ENV=test $(mocha)
+	@NODE_ENV=test \
+	$(mocha) --config test/.mocharc.json
 
 cov:
 	@echo "[INFO] Testing with Nyc and Mocha"
 	@NODE_ENV=test \
-	nyc $(mocha)
+	nyc $(mocha) --config test/.mocharc.json
+
+lint:
+	@echo "[INFO] Linting"
+	@NODE_ENV=production \
+	$(eslint) . --ext .ts,.tsx \
+	--config ./typescript/.eslintrc.json
+
+lint-fix:
+	@echo "[INFO] Linting and Fixing"
+	@NODE_ENV=development \
+	$(eslint) . --ext .ts,.tsx \
+	--config ./typescript/.eslintrc.json --fix
 
 install:
 	@echo "[INFO] Installing dev Dependencies"
@@ -64,17 +52,14 @@ license: clean
 	@echo "[INFO] Sign files"
 	@NODE_ENV=development $(ts_node) script/license.ts
 
-clean: clean-linux
+clean:
 	@echo "[INFO] Cleaning release files"
 	@NODE_ENV=development $(ts_node) script/clean-app.ts
 
-clean-linux:
-	@echo "[INFO] Cleaning dist files"
-	@rm -rf dist
-	@rm -rf dist_script
-	@rm -rf .nyc_output
-	@rm -rf coverage
-
-publish: install tests license build
+publish: install tests lint license build
 	@echo "[INFO] Publishing package"
 	@cd app && npm publish --access=public
+
+publish-dry-run: install tests lint license build
+	@echo "[INFO] Publishing package"
+	@cd app && npm publish --access=public --dry-run

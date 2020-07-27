@@ -10,6 +10,7 @@
         "deserialized",
         "downlevel",
         "ifeq",
+        "mocharc",
         "relogin",
         "setx",
         "splited",
