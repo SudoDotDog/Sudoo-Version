@@ -6,3 +6,11 @@
 [![downloads](https://img.shields.io/npm/dm/@sudoo/version.svg)](https://www.npmjs.com/package/@sudoo/version)
 
 :hash: Version Number Controller
+
+## Install
+
+```sh
+yarn add @sudoo/version --dev
+# Or
+npm install @sudoo/version --save-dev
+```
