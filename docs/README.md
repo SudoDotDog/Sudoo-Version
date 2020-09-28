@@ -14,3 +14,22 @@ yarn add @sudoo/version --dev
 # Or
 npm install @sudoo/version --save-dev
 ```
+
+## Config
+
+Add the following file to your project folder.
+
+```json
+{
+    "version": "1.0.0"
+}
+```
+
+Add next version indicator if `auto update` feature is used.
+
+```json
+{
+    "version": "1.0.0",
+    "next": "major"
+}
+```
