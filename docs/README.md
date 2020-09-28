@@ -9,6 +9,16 @@
 
 ## Install
 
+Install globally
+
+```sh
+yarn global add @sudoo/version
+# Or
+npm install @sudoo/version -g
+```
+
+Install in project scope
+
 ```sh
 yarn add @sudoo/version --dev
 # Or
@@ -32,4 +42,27 @@ Add next version indicator if `auto update` feature is used.
     "version": "1.0.0",
     "next": "major"
 }
+```
+
+## Usage
+
+Run the following script to get your version config file updated.
+
+Note: change `version` command to `npx version` or `./node_modules/.bin/version` if you installed the `@sudoo/version` package in project scope.
+
+```makefile
+get:
+	version get example/version.json
+
+major:
+	version major example/version.json
+
+minor:
+	version minor example/version.json
+
+patch:
+	version patch example/version.json
+
+auto:
+	version auto example/version.json
 ```
