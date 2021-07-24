@@ -1,6 +1,6 @@
 {
   "name": "@sudoo/version",
-  "version": "1.4.0",
+  "version": "2.0.0",
   "description": ":hash: Version Number Controller",
   "repository": {
     "type": "git",
