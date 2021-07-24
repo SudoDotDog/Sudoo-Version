@@ -21,9 +21,7 @@
     "@sudoo/semantic-version": "^1.2.0"
   },
   "devDependencies": {
-    "@sudoo/build-utils": "^1.0.0",
-    "@sudoo/license": "^1.1.0",
-    "@sudoo/triforce": "^2.9.29"
+    "@sudoo/triforce": "^2.9.25"
   },
   "nyc": {
     "extension": [
