@@ -17,7 +17,8 @@
   "homepage": "https://github.com/SudoDotDog/Sudoo-Version#readme",
   "dependencies": {
     "@sudoo/coco": "^1.8.5",
-    "@sudoo/io": "^1.8.0"
+    "@sudoo/io": "^1.8.0",
+    "@sudoo/semantic-version": "^1.2.0"
   },
   "devDependencies": {
     "@sudoo/build-utils": "^1.0.0",

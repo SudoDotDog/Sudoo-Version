@@ -7,28 +7,27 @@
 import { readTextFile, writeTextFile } from "@sudoo/io";
 import * as Fs from "fs";
 import { VersionFile } from "./declare";
-import { Version } from "./version";
 
-export const readConfig = async (path: string): Promise<Version> => {
+export const readConfig = async (path: string): Promise<VersionFile> => {
 
     const text: string = await readTextFile(path);
     const parsed: VersionFile = JSON.parse(text);
 
-    return Version.create(parsed.version, parsed.next);
+    return parsed;
 };
 
-export const readConfigSync = (path: string): Version => {
+export const readConfigSync = (path: string): VersionFile => {
 
     const text: string = Fs.readFileSync(path, 'utf8');
     const parsed: VersionFile = JSON.parse(text);
 
-    return Version.create(parsed.version, parsed.next);
+    return parsed;
 };
 
-export const writeConfig = async (path: string, version: Version, spaces: number = 2): Promise<void> => {
+export const writeConfig = async (path: string, version: string, spaces: number = 2): Promise<void> => {
 
     const structure: VersionFile = {
-        version: version.toString(),
+        version,
         next: 'patch',
     };
 

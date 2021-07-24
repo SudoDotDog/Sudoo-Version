@@ -4,40 +4,38 @@
  * @description Version
  */
 
-import { Next } from "./declare";
+import { SemanticVersion } from "@sudoo/semantic-version";
+import { Next, VersionFile } from "./declare";
 import { readConfig, readConfigSync } from "./io";
 
-export class Version {
+export class VersionPatcher {
 
-    public static async fromJson(path: string): Promise<Version> {
+    public static async fromJsonFile(path: string): Promise<VersionPatcher> {
 
-        return await readConfig(path);
+        const versionFile: VersionFile = await readConfig(path);
+        return new VersionPatcher(SemanticVersion.fromString(versionFile.version), versionFile.next);
     }
 
-    public static fromJsonSync(path: string): Version {
+    public static fromJsonFileSync(path: string): VersionPatcher {
 
-        return readConfigSync(path);
+        const versionFile: VersionFile = readConfigSync(path);
+        return new VersionPatcher(SemanticVersion.fromString(versionFile.version), versionFile.next);
     }
 
-    public static create(version: string, next: Next): Version {
+    public static fromString(version: string, next: Next): VersionPatcher {
 
-        const splited: number[] = version.split('.').map(Number);
-        if (splited.length !== 3 || isNaN(splited[0]) || isNaN(splited[1]) || isNaN(splited[2])) {
-            throw new Error(`Invalid version structure, should be "x.x.x", but got "${version}".`);
-        }
+        const semanticVersion: SemanticVersion = SemanticVersion.fromString(version);
 
-        return new Version(splited[0], splited[1], splited[2], next);
+        return new VersionPatcher(semanticVersion, next);
     }
 
-    private readonly _major: number;
-    private readonly _minor: number;
-    private readonly _patch: number;
+    private readonly _version: SemanticVersion;
 
     private readonly _next: Next;
 
-    private constructor(major: number, minor: number, patch: number, next: Next = 'patch') {
+    private constructor(version: SemanticVersion, next: Next = 'patch') {
 
-        [this._major, this._minor, this._patch] = [major, minor, patch];
+        this._version = version;
 
         this._next = next;
     }
@@ -46,17 +44,11 @@ export class Version {
         return this._next;
     }
 
-    public get majorVersion(): number {
-        return this._major;
-    }
-    public get minorVersion(): number {
-        return this._minor;
-    }
-    public get patchVersion(): number {
-        return this._patch;
+    public get version(): SemanticVersion {
+        return this._version;
     }
 
-    public auto(): Version {
+    public auto(): VersionPatcher {
 
         if (this._next.toLowerCase() === 'major') {
             return this.major();
@@ -69,58 +61,37 @@ export class Version {
         return this.patch();
     }
 
-    public major(): Version {
+    public major(): VersionPatcher {
 
-        return new Version(this._major + 1, 0, 0);
+        return new VersionPatcher(this._version.major());
     }
 
-    public minor(): Version {
+    public minor(): VersionPatcher {
 
-        return new Version(this._major, this._minor + 1, 0);
+        return new VersionPatcher(this._version.minor());
     }
 
-    public patch(): Version {
+    public patch(): VersionPatcher {
 
-        return new Version(this._major, this._minor, this._patch + 1);
+        return new VersionPatcher(this._version.patch());
     }
 
-    public compare(version: Version): 1 | 0 | -1 {
+    public compare(version: VersionPatcher): 1 | 0 | -1 {
 
-        if (this._major > version.majorVersion) {
-            return 1;
-        }
-        if (this._major < version.majorVersion) {
-            return -1;
-        }
-
-        if (this._minor > version.minorVersion) {
-            return 1;
-        }
-        if (this._minor < version.minorVersion) {
-            return -1;
-        }
-
-        if (this._patch > version.patchVersion) {
-            return 1;
-        }
-        if (this._patch < version.patchVersion) {
-            return -1;
-        }
-
-        return 0;
+        return this._version.compare(version._version);
     }
 
-    public isGreaterThan(version: Version): boolean {
+    public isGreaterThan(version: VersionPatcher): boolean {
 
         return this.compare(version) === 1;
     }
 
-    public isSmallerThan(version: Version): boolean {
+    public isSmallerThan(version: VersionPatcher): boolean {
 
         return this.compare(version) === -1;
     }
 
-    public equals(version: Version): boolean {
+    public equals(version: VersionPatcher): boolean {
 
         return this.compare(version) === 0;
     }
@@ -132,6 +103,6 @@ export class Version {
 
     public toString(): string {
 
-        return `${this._major}.${this._minor}.${this._patch}`;
+        return this._version.toString();
     }
 }
