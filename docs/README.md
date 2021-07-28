@@ -5,7 +5,7 @@
 [![npm version](https://badge.fury.io/js/%40sudoo%2Fversion.svg)](https://badge.fury.io/js/%40sudoo%2Fversion)
 [![downloads](https://img.shields.io/npm/dm/@sudoo/version.svg)](https://www.npmjs.com/package/@sudoo/version)
 
-:hash: Version Number Controller
+Version Number Controller
 
 ## Install
 
